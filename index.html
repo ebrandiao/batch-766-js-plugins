@@ -9,17 +9,53 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
+    <div
+      class="container py-5 my-5 text-center d-flex flex-column"
+      data-controller="disable-button"
+    >
+      <h2>Stimulus JS</h2>
+      <button
+        id="clickme"
+        class="btn btn-primary btn-lg"
+        data-action="click->disable-button#desabilitar"
+        data-disable-button-target="button"
+      >
+        Click me!
+      </button>
+
+      <button
+        href=""
+        class="d-none btn btn-danger btn-sm mt-3 w-25 align-self-center"
+        data-disable-button-target="link"
+        data-action="click->disable-button#reset"
+      >
+        Reset
+      </button>
+    </div>
+    <div class="container py-5 my-5 text-center">
+      <h2>Select2</h2>
+      <select class="batata" name="state">
+        <option value="ES">Espírito Santo</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="SP">São Paulo</option>
+        <option value="RJ">Rio de Janeiro</option>
+      </select>
+    </div>
+
     <div class="container text-center">
-      <form class="form-inline" id="search-form">
+      <h2>Movie Search</h2>
+      <form class="form-inline mb-3" id="search-form">
         <input
           type="text"
           class="form-control"
           placeholder="Find movie"
           id="search-input"
         />
-        <input type="submit" class="btn btn-primary" />
+        <input type="submit" class="btn btn-primary mt-3" />
       </form>
       <ul id="results" class="list-inline"></ul>
     </div>

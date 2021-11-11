@@ -1,27 +1,20 @@
-const list = document.querySelector("#results");
+// imports
+import { fetchMovies, updateList } from "./movies";
+import { initSortable } from "./plugins/init_sortable";
+import { initSelect2 } from "./plugins/init_select2";
 
-const insertMovies = (data) => {
-  data.Search.forEach((result) => {
-    const movieTag = `<li>
-      <img src="${result.Poster}" alt="" />
-      <p>${result.Title}</p>
-    </li>`;
-    list.insertAdjacentHTML("beforeend", movieTag);
-  });
-};
+import { Application } from "stimulus";
+import { definitionsFromContext } from "stimulus/webpack-helpers";
 
-const fetchMovies = (query) => {
-  fetch(`http://www.omdbapi.com/?s=${query}&apikey=adf1f2d7`)
-    .then(response => response.json())
-    .then(insertMovies);
-};
+const application = Application.start();
+const context = require.context("./controllers", true, /\.js$/);
+application.load(definitionsFromContext(context));
 
+// initializers
+initSortable();
+initSelect2();
+
+// activators
 fetchMovies("harry potter"); // on 1st page load
-
 const form = document.querySelector("#search-form");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  list.innerHTML = "";
-  const input = document.querySelector("#search-input");
-  fetchMovies(input.value);
-});
+form.addEventListener("submit", updateList);
